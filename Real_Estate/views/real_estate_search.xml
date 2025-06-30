@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- ✅ Search View -->
+    <record id="view_real_estate_property_search" model="ir.ui.view">
+        <field name="name">real.estate.property.search</field>
+        <field name="model">real.estate.property</field>
+        <field name="arch" type="xml">
+            <search string="Search Properties">
+                <field name="name" string="Name"/>
+                <field name="status" string="Status"/>
+
+                <!-- Filters -->
+                <filter name="name" string="name" domain="[('name', '=', 'Python Developer')]"/>
+                <filter name="status" string="status" domain="[('status', '=', 'Offer Accepted')]"/>
+
+                <!-- Group By -->
+                <group expand="1" string="Group By">
+                    <filter name="group_by_status" string="Status" context="{'group_by': 'status'}"/>
+                    <filter name="group_by_garden" string="Garden" context="{'group_by': 'garden'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ✅ Updated Action with Search View Linked -->
+    <record id="action_real_estate_properties" model="ir.actions.act_window">
+        <field name="name">Properties</field>
+        <field name="res_model">real.estate.property</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_real_estate_property_search"/>
+    </record>
+</odoo>
+
