@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Search-View-->
+     <record id="view_property_type_search" model="ir.ui.view">
+        <field name="name">property.type.search</field>
+        <field name="model">property.type</field>
+        <field name="arch" type="xml">
+            <search string="Search Properties">
+                <field name="salesperson_id" string="Salesperson"/>
+                <field name="buyer_id" string="Buyer"/>
+
+                <!-- Filters -->
+                <filter name="salesperson_id" string="Salesperson" domain="[('salesperson_id', '=', 'Mitchell Admin')]"/>
+
+            </search>
+        </field>
+    </record>
+</odoo>
