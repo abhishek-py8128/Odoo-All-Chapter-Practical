@@ -9,6 +9,7 @@
         'views/real_estate_search.xml',
         'views/property_type_views.xml',
         'views/property_type_search.xml',
+        'views/property_tag_views.xml',
     ],
     'installable': True,
     'application': True,

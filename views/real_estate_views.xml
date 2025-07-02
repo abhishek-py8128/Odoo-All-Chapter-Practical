@@ -21,6 +21,7 @@
                 <field name="garden_area"/>
                 <field name="status"/>
                 <field name="property_type_id"/>
+                <field name="tag_ids"/>
             </list>
         </field>
     </record>
@@ -56,6 +57,13 @@
                                 <field name="garden_area"/>
                                 <field name="garden_orientation"/>
                                 <field name="property_type_id"/>
+                                <field name="tag_ids" widget="many2many_tags"/>
+                            </group>
+                        </page>
+
+                        <page string="Offers">
+                            <group>
+
                             </group>
                         </page>
 
@@ -63,8 +71,6 @@
                             <group>
                                 <field name="salesperson_name" string="Salesman"/>
                                 <field name="buyer_name" string="Buyer"/>
-
-                                <field name="property_type_id.name" readonly="1"/>
                             </group>
                         </page>
                     </notebook>

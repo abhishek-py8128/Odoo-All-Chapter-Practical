@@ -6,7 +6,7 @@
         <field name="name">property.type.list</field>
         <field name="model">property.type</field>
         <field name="arch" type="xml">
-            <list string="Property Type">
+            <list string="Property Types">
                 <field name="name"/>
                 <field name="salesperson_id"/>
                 <field name="buyer_id"/>

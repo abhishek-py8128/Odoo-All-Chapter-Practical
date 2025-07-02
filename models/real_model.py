@@ -1,4 +1,7 @@
 from odoo import models, fields, api
+from odoo.fields import Many2many
+
+
 # from odoo.exceptions import ValidationError
 
 class RealEstateProperty(models.Model):
@@ -30,10 +33,12 @@ class RealEstateProperty(models.Model):
         ('Offer Accepted', 'Offer Accepted')
     ], default='New', string='Status')
 
-    property_type_id = fields.Many2one("property.type", string="PropertyType")
-
+    property_type_id = fields.Many2one("property.type", string="Property Type")
     salesperson_name = fields.Char(string="Salesperson", compute='_compute_salesperson_name', store=False)
     buyer_name = fields.Char(string="Buyer", compute='_compute_buyer_name', store=False)
+
+    tag_ids = fields.Many2many("estate.property.tag", string='Property Tag')
+    offer_ids = fields.One2many('estate.property.offer',string='Property Offer')
 
     @api.depends('property_type_id.salesperson_id')
     def _compute_salesperson_name(self):
@@ -58,9 +63,18 @@ class PropertyType(models.Model) :
         default=lambda self: self.env.ref('base.res_partner_2', raise_if_not_found=False)  # Optional static partner
     )
 
-    # Salesperson (linked to res.users)
     salesperson_id = fields.Many2one(
         'res.users',
         string="Salesman",
-        default=lambda self: self.env.user  # Current logged-in user
+        default=lambda self: self.env.user
     )
+
+class Estate_Property_tag(models.Model) :
+    _name = 'estate.property.tag'
+    _description = 'Property Tags'
+
+    name = fields.Char(required=True, string='Name')
+
+class Estate_Property_Offer(models.Model) :
+    _name = 'estate_property_offer'
+    _description = 'Property Offer'

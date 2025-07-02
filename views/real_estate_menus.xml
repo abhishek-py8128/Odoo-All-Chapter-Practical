@@ -25,5 +25,11 @@
               parent="menu_real_estate_settings"
               action="action_property_type"
               sequence="4"/>
+
+    <menuitem id="menu_real_estate_property_tags"
+              name="Property Tags"
+              parent="menu_real_estate_settings"
+              action="action_estate_property_tag"
+              sequence="5"/>
 </odoo>
 
