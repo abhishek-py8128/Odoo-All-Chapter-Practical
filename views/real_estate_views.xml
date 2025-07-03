@@ -22,6 +22,7 @@
                 <field name="status"/>
                 <field name="property_type_id"/>
                 <field name="tag_ids"/>
+                <field name="offer_ids"/>
             </list>
         </field>
     </record>
@@ -58,6 +59,7 @@
                                 <field name="garden_orientation"/>
                                 <field name="property_type_id"/>
                                 <field name="tag_ids" widget="many2many_tags"/>
+                                <field name="offer_ids"/>
                             </group>
                         </page>
 

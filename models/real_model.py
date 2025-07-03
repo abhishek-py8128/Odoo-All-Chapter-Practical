@@ -38,7 +38,7 @@ class RealEstateProperty(models.Model):
     buyer_name = fields.Char(string="Buyer", compute='_compute_buyer_name', store=False)
 
     tag_ids = fields.Many2many("estate.property.tag", string='Property Tag')
-    offer_ids = fields.One2many('estate.property.offer',string='Property Offer')
+    offer_ids = fields.One2many('estate.property.offer','property_id',string='Property Offer')
 
     @api.depends('property_type_id.salesperson_id')
     def _compute_salesperson_name(self):
@@ -76,5 +76,16 @@ class Estate_Property_tag(models.Model) :
     name = fields.Char(required=True, string='Name')
 
 class Estate_Property_Offer(models.Model) :
-    _name = 'estate_property_offer'
+    _name = 'estate.property.offer'
     _description = 'Property Offer'
+
+    price = fields.Float(string='Price')
+    status = fields.Selection(selection=[('Accepted','Accepted'),('Refused','Refused')], string='Status', copy=False)
+    partner_id = fields.Many2one(
+        'res.partner',
+        string='Partner',
+        required=True,
+        default=lambda self: self.env.ref('base.res_partner_2', raise_if_not_found=False)
+    )
+    property_id = fields.Many2one('real.estate.property',string='Property Id', required=True)
+
