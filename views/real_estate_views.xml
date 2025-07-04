@@ -60,6 +60,8 @@
                                 <field name="property_type_id"/>
                                 <field name="tag_ids" widget="many2many_tags"/>
                                 <field name="offer_ids"/>
+                                <field name="total_area"/>
+                                <field name="best_price"/>
                             </group>
                         </page>
 

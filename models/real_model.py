@@ -1,5 +1,4 @@
 from odoo import models, fields, api
-from odoo.fields import Many2many
 
 class RealEstateProperty(models.Model):
     _name = 'real.estate.property'
@@ -37,6 +36,9 @@ class RealEstateProperty(models.Model):
     tag_ids = fields.Many2many("estate.property.tag", string='Property Tag')
     offer_ids = fields.One2many('estate.property.offer','property_id',string='Property Offer')
 
+    total_area = fields.Integer(string='Total Area', compute='_compute_total_area')
+    best_price = fields.Integer(string='Best Price', compute='_compute_best_price')
+
     @api.depends('property_type_id.salesperson_id')
     def _compute_salesperson_name(self):
         for record in self:
@@ -46,6 +48,17 @@ class RealEstateProperty(models.Model):
     def _compute_buyer_name(self):
         for record in self:
             record.buyer_name = record.property_type_id.buyer_id.name if record.property_type_id and record.property_type_id.buyer_id else "No Buyer"
+
+    @api.depends('living_area','garden_area')
+    def _compute_total_area(self):
+        for record in self :
+            record.total_area = record.living_area + record.garden_area if record.living_area and record.garden_area else 0
+
+    @api.depends('offer_ids.price')
+    def _compute_best_price(self):
+        for record in self:
+            prices = record.offer_ids.mapped('price')
+            record.best_price = max(prices) if prices else 0.0
 
 class PropertyType(models.Model) :
     _name = 'property.type'
