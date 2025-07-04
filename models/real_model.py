@@ -1,9 +1,6 @@
 from odoo import models, fields, api
 from odoo.fields import Many2many
 
-
-# from odoo.exceptions import ValidationError
-
 class RealEstateProperty(models.Model):
     _name = 'real.estate.property'
     _description = 'Real Estate Property'
