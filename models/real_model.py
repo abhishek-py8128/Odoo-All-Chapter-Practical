@@ -87,5 +87,9 @@ class Estate_Property_Offer(models.Model) :
         required=True,
         default=lambda self: self.env.ref('base.res_partner_2', raise_if_not_found=False)
     )
-    property_id = fields.Many2one('real.estate.property',string='Property Id', required=True)
+    property_id = fields.Many2one(
+        'real.estate.property',
+        string='Property Id',
+        required=True
+    )
 
